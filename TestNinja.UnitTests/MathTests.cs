@@ -47,6 +47,12 @@ namespace TestNinja.UnitTests
             IEnumerable<int> result = _math.GetOddNumbers(5);
 
             Assert.That(result, Is.EquivalentTo(new[] {1, 3, 5}));
+
+            //If method is supposed to sort the items.
+            //Assert.That(result, Is.Ordered);
+
+            //Makes sure there are not duplicates.
+            //Assert.That(result, Is.Unique);
         }
     }
 }
