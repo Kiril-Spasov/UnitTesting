@@ -10,14 +10,20 @@ namespace TestNinja.UnitTests
     [TestFixture]
     internal class ErrorLoggerTests
     {
+        private ErrorLogger _logger;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _logger = new ErrorLogger();
+        }
+
         [Test]
         public void Log_WhenCalled_SetsLastErrorPropertyToMethodInput()
         {
-            ErrorLogger logger = new ErrorLogger();
+            _logger.Log("test error");
 
-            logger.Log("test error");
-
-            Assert.That(logger.LastError, Is.EqualTo("test error"));
+            Assert.That(_logger.LastError, Is.EqualTo("test error"));
         }
 
         [Test]
@@ -26,9 +32,20 @@ namespace TestNinja.UnitTests
         [TestCase(" ")]
         public void Log_WhenInputIsNullOrWhiteSpace_ThrowsArgumentNullException(string input)
         {
-            ErrorLogger logger = new ErrorLogger();
+            Assert.That(() => _logger.Log(input), Throws.ArgumentNullException);
+        }
 
-            Assert.That(() => logger.Log(input), Throws.ArgumentNullException);
+        [Test]
+        public void Log_ValidError_RaiseErrorLoggedEvent()
+        {
+            Guid id = Guid.Empty;
+
+            _logger.ErrorLogged += (sender, args) => { id = args; };
+
+            _logger.Log("a");
+
+            Assert.That(id, Is.Not.EqualTo(Guid.Empty));
+
         }
     }
 }
