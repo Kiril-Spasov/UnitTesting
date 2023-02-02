@@ -11,17 +11,21 @@ namespace TestNinja.UnitTests
     internal class CustomerControllerTests
     {
         [Test]
-        public void GetCustomer_WhenIdIsZero_ReturnsNotFound()
+        public void GetCustomer_IdIsZero_ReturnsNotFound()
         {
             CustomerController controller = new CustomerController();
 
             ActionResult result = controller.GetCustomer(0);
 
-            Assert.That(result, Is.TypeOf(typeof(NotFound)));
+            Assert.That(result, Is.TypeOf<NotFound>());
+
+            //Checks if result is NotFound or one of it's derivatives
+            //Assert.That(result, Is.InstanceOf<NotFound>());
+
         }
 
         [Test]
-        public void GetCustomer_WhenIdIsNotZero_ReturnsOk()
+        public void GetCustomer_IdIsNotZero_ReturnsOk()
         {
             CustomerController controller = new CustomerController();
 
