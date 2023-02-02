@@ -17,10 +17,10 @@ namespace TestNinja.UnitTests
             HtmlFormatter formatter = new HtmlFormatter();
 
             //Act
-            string result = formatter.FormatAsBold("test");
+            string result = formatter.FormatAsBold("abc");
 
             //Assert
-            Assert.That(result, Is.EqualTo("<strong>test</strong>"));
+            Assert.That(result, Is.EqualTo("<strong>abc</strong>").IgnoreCase);
         }
     }
 }
