@@ -9,9 +9,16 @@ namespace TestNinja.Mocking
 {
     public class VideoService
     {
+        private FileHandler _fileHandler;
+
+        public VideoService(FileHandler fileHandler)
+        {
+            _fileHandler = fileHandler;
+        }
+
         public string ReadVideoTitle()
         {
-            var str = File.ReadAllText("video.txt");
+            var str = _fileHandler.Read("video.txt");
             var video = JsonConvert.DeserializeObject<Video>(str);
             if (video == null)
                 return "Error parsing the video.";
