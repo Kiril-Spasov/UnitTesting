@@ -10,7 +10,7 @@ namespace TestNinja.Mocking
     {
         static void Main()
         {
-            VideoService video = new VideoService(new FileReader());
+            VideoService video = new VideoService(new FileReader(), new VideoRepository());
             video.ReadVideoTitle();
         }
     }
