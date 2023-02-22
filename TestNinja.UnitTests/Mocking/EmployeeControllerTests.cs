@@ -15,7 +15,6 @@ namespace TestNinja.UnitTests.Mocking
         public void DeleteEmployee_WhenCalled_DeleteEmployeeFromDb()
         {
             Mock<IEmployeeStorage> storage = new Mock<IEmployeeStorage>();
-
             EmployeeController controller = new EmployeeController(storage.Object);
 
             controller.DeleteEmployee(1);
